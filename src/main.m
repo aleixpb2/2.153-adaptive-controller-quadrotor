@@ -6,6 +6,7 @@ n = np + m;  % 16
 
 % Load drone parameters
 quad = droneParams;
+busInfo = Simulink.Bus.createObject(quad);
 
 % Matrix definitions
 Lambda = eye(m);  % unknown pos. def. matrix
@@ -51,5 +52,5 @@ R = diag(1./max_inputs.^2);
 R = R.*rho;
 
 [K,S,P] = lqr(Abar, B, Q, R);
-%K(K<1e-5) = 0
+K(K<1e-8) = 0;
 Kbl = -K;

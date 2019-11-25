@@ -113,7 +113,9 @@ quad.Ir = quad.nb*(quad.Ib+quad.Ic);            %   Ir      Total rotor inertia 
 % Aerodynamic constants
 quad.Axyz   = [0.10 0.10 0.20];
 
-% Added by Aleix Paris, input limits (from a real experiment with a thrust stand, for DJI Snail's Racing Propulsion System)
+% Added by Aleix Paris, input limits, from a real experiment with a thrust stand
+% DJI Snail Racing Propulsion System motor with a DJI Snail 5048 Tri-blade Propeller
+quad.omegar = 764;  % rad/s
 quad.ti_max = 8.781;  % maximum thrust per rotor (ct*w_max^2), N
 quad.taui_max = 0.1105;  % maximum torque per rotor (ctau*w_max^2), N*m
 quad.U1_max = quad.nrotors*quad.ti_max;  % max collective force
