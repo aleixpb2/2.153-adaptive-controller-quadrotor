@@ -51,9 +51,20 @@ Q = diag(1./max_states.^2);
 R = diag(1./max_inputs.^2);
 R = R.*rho;
 
-[K,S,P] = lqr(Abar, B, Q, R);
+[K,~,~] = lqr(Abar, B, Q, R);
 K(K<1e-8) = 0;
 % Slow states modification
-K() = 0;  % x terms
-K() = 0;  % y terms
+%K(:,1) = 0;  % x terms
+%K(:,2) = 0;  % y terms
 Kbl = -K;
+
+% Adaptive controller
+p = m+n+1;
+Gamma = eye(p);
+
+Kx = -lqr(Abar, B, eye(n), eye(m)); % B or B*Lambda?
+Am = Abar + B*Kx;
+eigs(Am)  % has to be Hurwitz (stable)
+P = lyap(Am.',eye(n));
+check_minusI = Am.'*P + P*Am;  % check that this is -I
+check_minusI(abs(check_minusI) < 1e-8) = 0;
