@@ -37,7 +37,7 @@ max_pos = 1000;
 max_ang = 2*pi;
 max_vel = 1000;
 max_rate = 4*pi;
-max_eyI = 0.5;  % integral of tracking error
+max_eyI = 0.01;  % integral of tracking error
 max_states = [
     max_pos; max_pos; max_pos;
     max_ang; max_ang; max_ang;
