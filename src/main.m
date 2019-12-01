@@ -31,11 +31,11 @@ Bp(12,4) = 1/quad.Iz;
 B = [Bp; zeros(m,m)];
 Bc = [zeros(np,m); -eye(m)];
 
-% Load LQR parameters
-rho = 0.2;
-max_pos = 1000;
+% Load LQR parameters. Bryson's rule:
+rho = 100000;
+max_pos = 100;
 max_ang = 2*pi;
-max_vel = 1000;
+max_vel = 100;
 max_rate = 4*pi;
 max_eyI = 0.01;  % integral of tracking error
 max_states = [
@@ -53,4 +53,7 @@ R = R.*rho;
 
 [K,S,P] = lqr(Abar, B, Q, R);
 K(K<1e-8) = 0;
+% Slow states modification
+K() = 0;  % x terms
+K() = 0;  % y terms
 Kbl = -K;
