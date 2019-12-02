@@ -60,11 +60,11 @@ Kbl = -K;
 
 % Adaptive controller
 p = m+n+1;
-Gamma = eye(p);
+Gamma = eye(p)*100;
 
 Kx = -lqr(Abar, B, eye(n), eye(m)); % B or B*Lambda?
 Am = Abar + B*Kx;
-eigs(Am)  % has to be Hurwitz (stable)
+%eigs(Am)  % has to be Hurwitz (stable)
 P = lyap(Am.',eye(n));
 check_minusI = Am.'*P + P*Am;  % check that this is -I
 check_minusI(abs(check_minusI) < 1e-8) = 0;
