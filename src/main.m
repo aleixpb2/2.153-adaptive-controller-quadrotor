@@ -10,6 +10,11 @@ busInfo = Simulink.Bus.createObject(quad);
 
 % Matrix definitions
 Lambda = eye(m);  % unknown pos. def. matrix
+Lambda(1,1) = 0.3;
+Lambda(2,2) = 0.9;
+Lambda(3,3) = 0.9;
+t_failure = 8;
+
 Ap = [
     zeros(3,3), zeros(3,3), eye(3), zeros(3,3);
     zeros(3,3), zeros(3,3), zeros(3,3), eye(3);
@@ -60,7 +65,7 @@ Kbl = -K;
 
 % Adaptive controller
 p = m+n+1;
-Gamma = eye(p)*100;
+Gamma = eye(p)*20;
 
 Kx = -lqr(Abar, B, eye(n), eye(m)); % B or B*Lambda?
 Am = Abar + B*Kx;
