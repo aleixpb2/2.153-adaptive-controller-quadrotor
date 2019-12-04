@@ -9,10 +9,11 @@ quad = droneParams;
 busInfo = Simulink.Bus.createObject(quad);
 
 % Matrix definitions
-Lambda = eye(m);  % unknown pos. def. matrix
-Lambda(1,1) = 0.3;
-Lambda(2,2) = 0.9;
-Lambda(3,3) = 0.9;
+%Lambda = eye(m);  % unknown pos. def. matrix
+%Lambda(1,1) = 0.3;
+%Lambda(2,2) = 0.9;
+%Lambda(3,3) = 0.9;
+lambda = 0.8;
 t_failure = 8;
 
 Ap = [
