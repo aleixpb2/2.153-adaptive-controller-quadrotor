@@ -9,11 +9,8 @@ quad = droneParams;
 busInfo = Simulink.Bus.createObject(quad);
 
 % Matrix definitions
-%Lambda = eye(m);  % unknown pos. def. matrix
-%Lambda(1,1) = 0.3;
-%Lambda(2,2) = 0.9;
-%Lambda(3,3) = 0.9;
-lambda = 0.8;
+Lambda = eye(m);  % unknown pos. def. matrix
+Lambda(1,1) = 0.8;
 t_failure = 8;
 
 Ap = [
@@ -74,3 +71,4 @@ Am = Abar + B*Kx;
 P = lyap(Am.',eye(n));
 check_minusI = Am.'*P + P*Am;  % check that this is -I
 check_minusI(abs(check_minusI) < 1e-8) = 0;
+
