@@ -116,7 +116,10 @@ quad.Axyz   = [0.10 0.10 0.20];
 % Added by Aleix Paris, input limits, from a real experiment with a thrust stand
 % DJI Snail Racing Propulsion System motor with a DJI Snail 5048 Tri-blade Propeller
 quad.omegar = 764;  % rad/s
-quad.ti_max = 8.781;  % maximum thrust per rotor (ct*w_max^2), N
+quad.ct   = 2.1099e-6;
+quad.ctau = 2.6806e-8;
+quad.omegar_max = 2054.92;  % rad/s
+quad.ti_max = quad.ct*quad.omegar_max^2;  % maximum thrust per rotor (ct*w_max^2), N
 quad.taui_max = 0.1105;  % maximum torque per rotor (ctau*w_max^2), N*m
 quad.U1_max = quad.nrotors*quad.ti_max;  % max collective force
 quad.U2_max = quad.nrotors/2*quad.ti_max;  %  maximum roll force, force of half the rotors with max force and the other half stopped
