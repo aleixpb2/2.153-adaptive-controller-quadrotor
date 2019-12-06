@@ -9,11 +9,11 @@ quad = droneParams;
 busInfo = Simulink.Bus.createObject(quad);
 
 % Matrix definitions
-%Lambda = eye(m);  % unknown pos. def. matrix
-%Lambda(1,1) = 0.3;
-%Lambda(2,2) = 0.9;
-%Lambda(3,3) = 0.9;
-lambda = 0.8;
+Lambda = eye(m);  % unknown pos. def. matrix
+Lambda(1,1) = 0.3;
+Lambda(2,2) = 0.9;
+Lambda(3,3) = 0.9;
+Lambda(4,4) = 1;
 t_failure = 8;
 
 Ap = [
@@ -58,15 +58,16 @@ R = diag(1./max_inputs.^2);
 R = R.*rho;
 
 [K,~,~] = lqr(Abar, B, Q, R);
-K(K<1e-8) = 0;
+%K(abs(K)<1e-8) = 0;
 % Slow states modification
 %K(:,1) = 0;  % x terms
 %K(:,2) = 0;  % y terms
 Kbl = -K;
+%Kbl(2,14) = Kbl(3,13);
 
 % Adaptive controller
 p = m+n+1;
-Gamma = eye(p)*20;
+Gamma = eye(p)*1000;
 
 Kx = -lqr(Abar, B, eye(n), eye(m)); % B or B*Lambda?
 Am = Abar + B*Kx;
