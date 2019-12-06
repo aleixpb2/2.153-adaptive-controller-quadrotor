@@ -8,7 +8,7 @@ n = np + m;  % 16
 quad = droneParams;
 busInfo = Simulink.Bus.createObject(quad);
 
-% Matrix definitions
+%% Matrix definitions
 Lambda = eye(m);  % unknown pos. def. matrix
 Lambda(1,1) = 0.4;
 t_failure = 12;
@@ -34,7 +34,7 @@ Bp(12,4) = 1/quad.Iz;
 B = [Bp; zeros(m,m)];
 Bc = [zeros(np,m); -eye(m)];
 
-% Load LQR parameters. Bryson's rule:
+%% Load LQR parameters. Bryson's rule:
 rho = 100000;
 max_pos = 100;
 max_ang = 2*pi;
@@ -61,7 +61,7 @@ R = R.*rho;
 %K(:,2) = 0;  % y terms
 Kbl = -K;
 
-% Adaptive controller
+%% Adaptive controller
 p = m+n+1;
 Gamma = eye(p)*1000;
 
@@ -71,4 +71,3 @@ Am = Abar + B*Kx;
 P = lyap(Am.',eye(n));
 check_minusI = Am.'*P + P*Am;  % check that this is -I
 check_minusI(abs(check_minusI) < 1e-8) = 0;
-
