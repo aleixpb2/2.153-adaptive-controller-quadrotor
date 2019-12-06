@@ -9,6 +9,11 @@ z     = out.X.signals.values(3,1,:); z = reshape(z,n_data,1);
 roll  = out.X.signals.values(4,1,:); roll = reshape(roll,n_data,1);
 pitch = out.X.signals.values(5,1,:); pitch = reshape(pitch,n_data,1);
 yaw   = out.X.signals.values(6,1,:); yaw = reshape(yaw,n_data,1);
+
+% Save to Excel
+saveToExcel(t,x, y, z, roll, pitch, yaw)
+
+% Rad to deg for ploting
 roll  = rad2deg(roll);
 pitch  = rad2deg(pitch);
 yaw  = rad2deg(yaw);
@@ -47,6 +52,3 @@ ylabel('Orientation (deg)')
 legend('\phi (roll)', '\theta (pitch)', '\psi (yaw)', 'Location', 'north')
 xlim([0, t(end)])
 ylim([-7, 7])
-
-%% Save to Excel
-saveToExcel(t,x, y, z, roll, pitch, yaw)
